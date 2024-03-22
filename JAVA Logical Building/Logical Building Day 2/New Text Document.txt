@@ -1,0 +1,32 @@
+class Student								// creating Class
+{
+	string name;
+	double subject1mark1;
+	double subject2mark2;
+	double subject3mark3;
+
+public void assignInitalValues(string name, double subject1mark, double subject2mark, double subject3mark)	
+	{
+		name= "Ansh";
+		subject1mark = 70;
+		subject2mark = 86;
+		subject3mark = 80;	
+	}
+
+public double computeTotalMarks()
+	{
+		return subject1mark + subject2mark + subject3mark;
+	}
+
+public double computeAverageMarks()
+	{
+		return computeTotalMarks() / 3;
+	}
+
+public void displayStudentDetails()
+	{
+		System.out.println("Student Name: " + name);
+		System.out.println("Total Marks Obtained: " + computeTotalMarks());	
+	}
+
+}
