@@ -1,0 +1,27 @@
+Book Inventery management system
+========================================
+class Book;
+tittle;
+author;
+publisher;
+isbn
+year
+price
+quantity
+=======================================
+constructor
+using this keyword
+===================================
+Getter&setter
+shortcut ker -> Alt+shift+S
+=======================================
+main method
+creat instance of book
+increaseQuantity
+sysout
+
+decreaseQuantity
+sysout
+
+getInventoryValue() 
+sysout

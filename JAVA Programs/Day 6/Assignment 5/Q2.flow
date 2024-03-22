@@ -1,0 +1,29 @@
+BMI Calculator
+======================
+class Book
+======================
+fields:
+double height
+double weight
+=====================
+constructor:
+this.height=height
+this.weight=weight
+====================
+getter setter:
+using lambok!
+
+double calculateBMI = weight / (height * height)
+====================
+main method
+scanner 
+sysout = h
+double height = scanner.nextline
+sysout = w
+double weight = scanner.next.line()
+
+instance of bmi calclator
+
+sysout = your bmi is: 
+
+===================
