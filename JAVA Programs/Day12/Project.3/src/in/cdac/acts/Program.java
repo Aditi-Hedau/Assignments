@@ -1,0 +1,88 @@
+package in.cdac.acts;
+
+import java.util.Scanner;
+
+class Rectangle {
+	float length;
+	float breadth;
+	private float area;
+
+	public Rectangle() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setLength(float length) {
+		this.length = length;
+	}
+
+	public void setBreadth(float breadth) {
+		this.breadth = breadth;
+	}
+
+	public void calculateArea() {
+		this.area = this.length * this.breadth;
+	}
+
+	public float getArea() {
+		return this.area;
+	}
+}
+
+class Circle {
+	float radius;
+	private float area;
+
+	public Circle() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setRadius(float radius) {
+		this.radius = radius;
+	}
+
+	public void calculateArea() {
+		this.area = (float) (Math.PI * Math.pow(this.radius, 2));
+	}
+
+	public float getArea() {
+		return this.area;
+	}
+}
+
+public class Program {
+
+	private static Scanner sc = new Scanner(System.in);
+
+	private static int menuList() {
+		System.out.println("0. Exit");
+		System.out.println("1. Rectangle");
+		System.out.println("2. Circle");
+		System.out.print("Enter choice: ");
+		return sc.nextInt();
+	}
+
+	public static void main(String[] args) {
+		int choice;
+		while ((choice = Program.menuList()) != 0)
+			switch (choice) {
+			case 1:
+				Rectangle rect = new Rectangle();
+				System.out.print(" Rectangle Length : ");
+				rect.setLength(sc.nextFloat());
+				System.out.print(" Rectangle Breadth : ");
+				rect.setBreadth(sc.nextFloat());
+				rect.calculateArea();
+				System.out.print(" Area of RECTANGLE : " + rect.getArea());
+				break;
+			case 2:
+				Circle c = new Circle();
+				System.out.print(" Circle Radius : ");
+				c.setRadius(sc.nextFloat());
+				c.calculateArea();
+				System.out.print(" Area of CIRCLE : " + c.getArea());
+				break;
+			}
+
+	}
+
+}
