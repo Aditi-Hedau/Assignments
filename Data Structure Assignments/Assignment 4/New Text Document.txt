@@ -1,0 +1,90 @@
+class DLL{
+	Node head;
+	
+	static class Node{
+		int data;
+		Node prev;
+		Node next;
+
+		Node(int d){
+			data = d;
+			prev = null;
+			next = null;
+		}
+	}
+	
+	void insert(int new_data){	//insertion at beginning
+		Node new_node = new Node(new_data);
+		new_node.next = head;
+		new_node.prev = null;
+		if(head != null)
+			head.prev = new_node;
+		head = new_node;
+	}
+
+	void display(Node n){
+		Node p = null;
+		System.out.print("Forward direction: ");
+		while(n != null){
+			System.out.print(n.data + "---->");
+			p=n;
+			n=n.next;
+		}
+		
+		System.out.println();
+
+		System.out.print("Backward direction: ");
+		while(p != null){
+			System.out.print(p.data + "---->");
+			p=p.prev;
+		}
+	}
+
+	void insertBetween(Node prev, int new_data){	//insertion in between two nodes
+		Node new_node = new Node(new_data);
+		new_node.next = prev.next;
+		prev.next = new_node;
+		new_node.prev = prev;
+		new_node.next.prev = new_node;		
+	}
+
+	void insertEnd(int new_data){
+		Node new_node = new Node(new_data);
+		Node n = head;	
+		//LL is empty condition------------
+		if(head == null){
+			new_node.prev = null;
+			head = new_node;
+			return; 	
+		}
+		//LL is existing-------------------
+		while(n.next != null){
+			n=n.next;
+		}
+		n.next = new_node;
+		new_node.prev = n;
+	}
+
+	public static void main(String args[]){
+		DLL d = new DLL();
+
+		d.insert(5);
+		d.insert(10);
+		d.insert(15);
+		d.display(d.head);
+
+		System.out.println();
+
+		d.insertBetween(d.head.next, 99);
+		d.insertBetween(d.head, 88);
+		d.display(d.head);
+
+		System.out.println();	
+
+		d.insertEnd(100);
+		d.insertEnd(200);
+		d.display(d.head);
+		
+		System.out.println();
+	}
+}
