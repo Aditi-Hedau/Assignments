@@ -1,0 +1,206 @@
+####Q1) Balanced Bracket
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'isBalanced' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING s as parameter.
+     */
+
+    public static String isBalanced(String s) {
+        Stack<Character> stack = new Stack<>();
+        for(char bracket : s.toCharArray()){
+            if(bracket == '(' || bracket == '[' || bracket == '{'){
+                stack.push(bracket);
+            } else {
+                if(stack.isEmpty()){
+                    return "NO";
+                }
+                char top = stack.pop();
+                if((bracket == ')' && top != '(')|| (bracket == ']' && top != '[') || (bracket == '}' && top != '{')){
+                    return "NO";
+                }
+            }
+        }
+        return stack.isEmpty() ? "YES" : "NO";
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int t = Integer.parseInt(bufferedReader.readLine().trim());
+
+        IntStream.range(0, t).forEach(tItr -> {
+            try {
+                String s = bufferedReader.readLine();
+
+                String result = Result.isBalanced(s);
+
+                bufferedWriter.write(result);
+                bufferedWriter.newLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------
+####Q2) Heap 3
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static void heapify(int arr[], int n, int i){
+        int largest = i;
+        int l = 2*i+1;
+        int r = 2*i+2;
+        
+        if(l<n && arr[l]>arr[largest]){
+            largest = l; 
+        }
+        if(r<n && arr[r]>arr[largest]){
+            largest = r;
+        }
+        if(largest != i){
+            int temp = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = temp;
+            heapify(arr, n, largest);
+        }
+    }
+    
+    static void heapsort(int arr[]){
+        int n = arr.length;
+        for(int i = n/2-1; i>=0; i--){
+            heapify(arr, n, i);
+        }
+        
+        for(int i = n-1; i>0; i--){
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+            heapify(arr, i , 0);
+        }
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i<n; i++){
+            arr[i] = sc.nextInt();
+        }
+        heapsort(arr);
+        
+        for(int i = 0; i<n; i++){
+            System.out.print(arr[i] + " ");
+        }
+        
+    }
+}
+-----------------------------------------------------------------------------------------------------------------
+#### Q3) Linked List
+import java.io.*;
+import java.util.*;
+class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data = data;
+            next = null;
+        }
+    }
+public class Solution {
+    static Node head;
+    
+    static void insert(int new_data){
+        Node new_node = new Node(new_data);
+        if(head == null){
+            head = new_node;
+            return;
+        } else{
+            Node temp = head;
+            while(temp.next != null){
+                temp = temp.next;
+            }
+            temp.next = new_node;            
+        }
+    }
+    
+    static int findMiddle(){
+        if(head == null){
+            return -1; 
+        }
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.data;
+    }
+    
+    static boolean search(int key){
+        Node temp = head; 
+        while(temp != null){
+            if(temp.data == key){
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+    
+    static void display(){
+        Node n = head;
+        while(n != null){
+            System.out.print(n.data + " ");
+            n = n.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        Solution s = new Solution();
+            
+        String[] elements = sc.nextLine().split("\\s+");
+        for(String element : elements){
+            s.insert(Integer.parseInt(element));
+        }
+       
+        int searchElement = sc.nextInt();
+        
+        s.display();
+            
+        int middle = s.findMiddle();
+        System.out.println(middle != -1 ? middle : " ");
+            
+        System.out.println(s.search(searchElement) ? "Found" : "Not Found");
+        
+    }
+}
